@@ -1,6 +1,9 @@
 package com.api.tests;
 
 import org.testng.annotations.Test;
+
+import com.api.utils.SpecUtil;
+
 import static org.hamcrest.Matchers.*;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -17,22 +20,14 @@ public class MasterApiTest {
 	public void masterAPITest() {
 		
 		given()
-	       .baseUri(getProperty("BASE_URI"))
-	       .and()
-	       .header("Authorization", gettoken(FD))
-	       .and()
-	       .contentType("")
-	       .log().uri()
-	       .log().method()
-	       .log().headers()
+		   .spec(SpecUtil.requestSpecWithAuth(FD))
 	       .when()
 	       .post("master")
 	       .then()
 	       .log().all()
 	       .log().ifValidationFails()
-	       .statusCode(200)
+	       .spec(SpecUtil.responseSpec_OK())
 	       .body("message", equalTo("Success"))
-	       .time(lessThan(1000L))
 	       .body("data", notNullValue())
 	       .body("data", hasKey("mst_oem"))
 	       .body("data", hasKey("mst_model"))
@@ -50,20 +45,13 @@ public class MasterApiTest {
 	public void InvalidTokenMasterApi() {
 		
 		given()
-	       .baseUri(getProperty("BASE_URI"))
-	       .and()
-	       .header("Authorization", "")
-	       .and()
-	       .contentType("")
-	       .log().uri()
-	       .log().method()
-	       .log().headers()
+		   .spec(SpecUtil.requestSpec())
 	       .when()
 	       .post("master")
 	       .then()
-	       .log().all()
-	       .statusCode(401);
+	       .spec(SpecUtil.responseSpec_TEXT(401));
 		
+	       
 		
 	}
 

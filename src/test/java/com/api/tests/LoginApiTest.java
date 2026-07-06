@@ -9,6 +9,8 @@ import java.io.IOException;
 import org.testng.annotations.Test;
 
 import com.api.pojos.UserCredentials;
+import com.api.utils.SpecUtil;
+
 import static com.api.utils.ConfigManager.*;
 
 
@@ -22,12 +24,15 @@ public class LoginApiTest {
 
 		UserCredentials userCredentials = new UserCredentials("iamfd", "password");
 
-		given().baseUri(getProperty("BASE_URI")).and().contentType(ContentType.JSON).and().accept(ContentType.JSON)
-				.and().body(userCredentials).log().uri().log().method().log().headers().log().body().when()
-				.post("login").then().statusCode(200).and().body("message", equalTo("Success")).and()
-				.time(lessThan(1500L)).and()
-				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/LoginResponseSchema.json"))
-				.log().all();
+		given()
+		  .spec(SpecUtil.requestSpec(userCredentials))
+		  .when()
+		  .post("login")
+		  .then()
+		  .spec(SpecUtil.responseSpec_OK())
+		  .body("message", equalTo("Success"))
+		  .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/LoginResponseSchema.json"));
+				 
 
 	}
 
