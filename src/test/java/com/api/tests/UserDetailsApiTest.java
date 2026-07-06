@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import org.testng.annotations.Test;
 
+import com.api.utils.SpecUtil;
+
 import static com.api.constants.Role.*;
 
 import static com.api.utils.AuthTokenProvider.*;
@@ -19,34 +21,18 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import static io.restassured.RestAssured.*;
 
 public class UserDetailsApiTest {
-	
-	Header  autHeader = new Header("Authorization", gettoken(FD));
-	
+		
 	@Test
 	public void userDetailsApiTest() throws IOException {
 		
 		 given()
-		 .baseUri(getProperty("BASE_URI"))
-         .and()
-         .header(autHeader)
-         .and()
-         .contentType(ContentType.JSON)
-         .and()
-         .accept(ContentType.JSON)
-         .and()
-         .log().uri()
-         .log().method()
-         .log().headers()
+		 .spec(SpecUtil.requestSpecWithAuth(FD))
          .when()
          .get("userdetails")
          .then()
-         .statusCode(200)
-         .time(lessThan(1500L))
+         .spec(SpecUtil.responseSpec_OK())
          .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/UserDetailsResponseSchema.json"))
-         .body("message", equalTo("Success"))
-         .log().all();
-		 
-		
-	}
+         .body("message", equalTo("Success"));
+        	}
 
 }
