@@ -1,32 +1,31 @@
 package com.api.tests;
 
-import org.testng.annotations.Test;
+import static com.api.constants.Role.FD;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.notNullValue;
 
-import com.api.utils.SpecUtil;
+import  org.testng.annotations.Test;
 
-import static org.hamcrest.Matchers.*;
+import static com.api.utils.SpecUtil.*;
 
-import io.restassured.module.jsv.JsonSchemaValidator;
-
-import static com.api.constants.Role.*;
-import static com.api.utils.AuthTokenProvider.*;
-
-import static com.api.utils.ConfigManager.*;
-
-import static io.restassured.RestAssured.*;
+import static io.restassured.module.jsv.JsonSchemaValidator.*;
 public class MasterApiTest {
 	
-	@Test
+	@Test(description = "Verifying if the MasterApi is giving correct response", groups = {"api","regression","smoke"})
 	public void masterAPITest() {
 		
 		given()
-		   .spec(SpecUtil.requestSpecWithAuth(FD))
+		   .spec(requestSpecWithAuth(FD))
 	       .when()
 	       .post("master")
 	       .then()
 	       .log().all()
 	       .log().ifValidationFails()
-	       .spec(SpecUtil.responseSpec_OK())
+	       .spec(responseSpec_OK())
 	       .body("message", equalTo("Success"))
 	       .body("data", notNullValue())
 	       .body("data", hasKey("mst_oem"))
@@ -36,20 +35,20 @@ public class MasterApiTest {
 	       .body("data.mst_oem.size()", equalTo(2))
 	       .body("data.mst_model.size()", greaterThan(0))
 	       .body("data.mst_oem.id", everyItem(notNullValue()))
-	       .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/MasterApiResponseSchema.json"));
+	       .body(matchesJsonSchemaInClasspath("response-schema/MasterApiResponseSchema.json"));
 		
 		
 	}
 	
-	@Test
+	@Test(description = "Verifying if the MasterApi is giving correct status code for invalid token", groups = {"api","negative","regression","smoke"})
 	public void InvalidTokenMasterApi() {
 		
 		given()
-		   .spec(SpecUtil.requestSpec())
+		   .spec(requestSpec())
 	       .when()
 	       .post("master")
 	       .then()
-	       .spec(SpecUtil.responseSpec_TEXT(401));
+	       .spec(responseSpec_TEXT(401));
 		
 	       
 		

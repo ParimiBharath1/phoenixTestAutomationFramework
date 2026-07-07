@@ -7,7 +7,7 @@ import java.util.concurrent.Flow.Publisher;
 import org.hamcrest.Matchers;
 
 import com.api.constants.Role;
-import com.api.pojos.UserCredentials;
+import com.api.request.model.UserCredentials;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
