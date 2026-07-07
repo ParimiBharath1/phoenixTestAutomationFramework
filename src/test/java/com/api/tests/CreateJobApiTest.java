@@ -10,11 +10,12 @@ import java.util.List;
 import org.testng.annotations.Test;
 
 import com.api.constants.Role;
-import com.api.pojos.CreateJobPayload;
-import com.api.pojos.Customer;
-import com.api.pojos.CustomerAddress;
-import com.api.pojos.CustomerProduct;
-import com.api.pojos.Problems;
+import com.api.request.model.CreateJobPayload;
+import com.api.request.model.Customer;
+import com.api.request.model.CustomerAddress;
+import com.api.request.model.CustomerProduct;
+import com.api.request.model.Problems;
+import static com.api.utils.DateTimeUtil.*;
 import com.api.utils.SpecUtil;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -27,8 +28,8 @@ public class CreateJobApiTest {
 		Customer customer = new Customer("Raju", "Kumar", "8900988907", "", "RajuKumar@gmail.com", "");
 		CustomerAddress customerAddress = new CustomerAddress("2-983", "Raju Enclave", "Raju Road", "Amogha",
 				"Kondapur", "515003", "India", "Telangana");
-		CustomerProduct customerProduct = new CustomerProduct("2024-10-15T18:30:00.000Z", "102046023748291",
-				"102046023748291", "102046023748291", "2024-10-15T18:30:00.000Z", 1, 1);
+		CustomerProduct customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "102046023748292",
+				"102046023748292", "102046023748292", getTimeWithDaysAgo(10), 1, 1);
 		Problems problems = new Problems(2, "Charging Issue");
 
 		List<Problems> problemlist = new ArrayList<Problems>();

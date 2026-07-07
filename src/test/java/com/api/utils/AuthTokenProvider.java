@@ -8,8 +8,7 @@ import static com.api.utils.ConfigManager.*;
 import static com.api.constants.Role.*;
 
 import com.api.constants.Role;
-//import static com.api.utils.ConfigManager.*;
-import com.api.pojos.UserCredentials;
+import com.api.request.model.UserCredentials;
 
 import io.restassured.http.ContentType;
 
