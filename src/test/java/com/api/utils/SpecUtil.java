@@ -78,6 +78,25 @@ public class SpecUtil {
 		
 	}
     
+ public static RequestSpecification requestSpecWithAuth(Role role, Object payload) {
+		
+		
+		RequestSpecification requestSpecification = new  RequestSpecBuilder()
+				.setBaseUri(getProperty("BASE_URI"))
+				.setContentType(ContentType.JSON)
+				.setAccept(ContentType.JSON)
+				.addHeader("Authorization", AuthTokenProvider.gettoken(role))
+				.setBody(payload)
+				.log(LogDetail.URI)
+				.log(LogDetail.METHOD)
+				.log(LogDetail.BODY)
+				.log(LogDetail.HEADERS)
+				.build();
+		
+				
+				return requestSpecification;
+		
+	}
     
      public static ResponseSpecification responseSpec_OK() {
     	 
