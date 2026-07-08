@@ -1,3 +1,4 @@
+package com.dataprovider.api.bean;
 
 public class UserBean {
 	
