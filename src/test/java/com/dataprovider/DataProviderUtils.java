@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.collections.functors.TruePredicate;
 import org.testng.annotations.DataProvider;
 
 import com.api.request.model.CreateJobPayload;
 import com.api.utils.CreateJobBeanMapper;
 import com.api.utils.CsvReaderUtility;
+import com.api.utils.FakerDataGenerator;
 import com.dataprovider.api.bean.CreateJobBean;
 import com.dataprovider.api.bean.UserBean;
 
@@ -36,5 +36,14 @@ public class DataProviderUtils {
 		   }
 		   
 		   return payloadLists.iterator();
+	}
+	
+	@DataProvider(name="CreateJobAPIFakerDataProvider",parallel = true)
+	public static Iterator<CreateJobPayload> CreateJobAPIFakerTest() {
+		
+		      Iterator<CreateJobPayload> payloadIterator = FakerDataGenerator.createFakeCreateJobdata(100);
+		     
+		         return payloadIterator;
+		
 	}
 }
