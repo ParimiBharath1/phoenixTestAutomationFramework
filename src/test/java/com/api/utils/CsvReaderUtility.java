@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.List;
 
-import com.dataprovider.api.bean.UserBean;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -16,7 +15,7 @@ public class CsvReaderUtility {
 		
 	}
 	
-public static Iterator<UserBean>  loadCsv(String pathOfCsvFile) {
+public static <T>  Iterator<T>  loadCsv(String pathOfCsvFile, Class<T> bean) {
 		
  
 		
@@ -26,13 +25,13 @@ public static Iterator<UserBean>  loadCsv(String pathOfCsvFile) {
 		CSVReader csvReader = new CSVReader(is);
 		
 		
-		CsvToBean<UserBean> csvToBean = new CsvToBeanBuilder(csvReader)
-				                     .withType(UserBean.class)
+		CsvToBean<T> csvToBean = new CsvToBeanBuilder(csvReader)
+				                     .withType(bean)
 				                     .withIgnoreEmptyLine(true)
 				                      .build();
 		
-		List<UserBean> dataList =csvToBean.parse();
-		 return dataList.iterator();
+		List<T> List = csvToBean.parse();
+		 return List.iterator();
 		   
 	}
 
