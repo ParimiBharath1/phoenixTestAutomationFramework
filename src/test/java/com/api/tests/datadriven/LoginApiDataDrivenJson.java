@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.api.request.model.CreateJobPayload;
 import com.api.request.model.UserCredentials;
 import com.dataprovider.api.bean.UserBean;
 
@@ -21,7 +22,7 @@ public class LoginApiDataDrivenJson {
 	@Test(description = "Verifying if login Api is working for FD user", 
 		groups = {"api","regression","smoke"},
 		dataProviderClass = com.dataprovider.DataProviderUtils.class,
-		dataProvider = "CreateJobAPIJsonDataProvider")
+		dataProvider = "UserCredentialsProvider")
 	public void loginApiTest(UserCredentials userCredentials) {
 
 	
