@@ -15,7 +15,7 @@ import static com.api.utils.SpecUtil.*;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
-public class LoginApiDatDriven {
+public class LoginApiDataDriven {
 	
 	 
 	@Test(description = "Verifying if login Api is working for FD user", 
