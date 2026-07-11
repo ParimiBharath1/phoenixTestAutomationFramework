@@ -1,0 +1,36 @@
+package com.api.tests.datadriven;
+
+import static com.api.utils.SpecUtil.requestSpec;
+import static com.api.utils.SpecUtil.responseSpec_OK;
+import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.hamcrest.Matchers.equalTo;
+
+import org.testng.annotations.Test;
+
+import com.dataprovider.api.bean.UserBean;
+
+public class LoginApiDataDrivenExcel {
+	
+	 
+	@Test(description = "Verifying if login Api is working for FD user", 
+		groups = {"api","regression","smoke"},
+		dataProviderClass = com.dataprovider.DataProviderUtils.class,
+		dataProvider = "LoginAPIExcelDataProvider")
+	public void loginApiTest(UserBean userBean) {
+
+	
+
+		given()
+		  .spec(requestSpec(userBean))
+		  .when()
+		  .post("login")
+		  .then()
+		  .spec(responseSpec_OK())
+		  .body("message", equalTo("Success"))
+		  .body( matchesJsonSchemaInClasspath("response-schema/LoginResponseSchema.json"));
+				 
+
+	}
+
+}
