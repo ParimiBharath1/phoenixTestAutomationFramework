@@ -1,52 +1,42 @@
 package com.api.utils;
 
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
+import java.util.List;
 
-import org.apache.poi.xssf.eventusermodel.XSSFSheetXMLHandler;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
+ 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class ExcelReaderUtil {
+import com.dataprovider.api.bean.UserBean;
+import com.poiji.bind.Poiji;
 
-	public static void main(String[] args) throws IOException {
+
+public class ExcelReaderUtil {
+	
+	private ExcelReaderUtil() {
+		
+	}
+
+	public static <T> Iterator<T> loadTestData(String xlsxfile,String sheetname, Class<T> clazz) {
 		// TODO Auto-generated method stub
 		
-		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("testData/PhoenixTestData.xlsx");
+		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(xlsxfile);
 				
-		XSSFWorkbook  myWorkbook = new XSSFWorkbook(is);
+		XSSFWorkbook myWorkbook=null;
+		try {
+			myWorkbook = new XSSFWorkbook(is);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		XSSFSheet mySheet = myWorkbook.getSheet("loginsheet");
+		XSSFSheet mySheet = myWorkbook.getSheet(sheetname);
 		
-		XSSFRow myRow;  
-		XSSFCell myCell;  
-		
-		//System.out.println(myCell);
-		
-		
-		int lastrowIndex = mySheet.getLastRowNum();
-		System.out.println(lastrowIndex);
-		
-		XSSFRow rowheader = mySheet.getRow(0);
-		
-		int lastcolindex = rowheader.getLastCellNum()-1;
-		
-		System.out.println(lastcolindex);
-		
-		   for(int rowIndex=0;rowIndex<=lastrowIndex;rowIndex++) {
-			   for(int  colIndex=0;colIndex<=lastcolindex;colIndex++) {
-				       myRow = mySheet.getRow(rowIndex);
-				       myCell = myRow.getCell(colIndex);
-				       System.out.print(myCell+ " ");
-			   }
-			   System.out.println("");
-		   }
-		
-		
-
+	    List<T>  datalist =Poiji.fromExcel(mySheet, clazz);
+	    
+	    return datalist.iterator();
 	}
 
 }
