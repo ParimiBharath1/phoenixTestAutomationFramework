@@ -1,20 +1,14 @@
 package com.api.tests.datadriven;
 
+import static com.api.utils.SpecUtil.requestSpec;
+import static com.api.utils.SpecUtil.responseSpec_OK;
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 
-import java.io.IOException;
-
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.api.request.model.CreateJobPayload;
-import com.api.request.model.UserCredentials;
 import com.dataprovider.api.bean.UserBean;
-
-import static com.api.utils.SpecUtil.*;
-
-import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 public class LoginApiDataDrivenExcel {
 	
@@ -23,12 +17,12 @@ public class LoginApiDataDrivenExcel {
 		groups = {"api","regression","smoke"},
 		dataProviderClass = com.dataprovider.DataProviderUtils.class,
 		dataProvider = "LoginAPIExcelDataProvider")
-	public void loginApiTest(UserCredentials userCredentials) {
+	public void loginApiTest(UserBean userBean) {
 
 	
 
 		given()
-		  .spec(requestSpec(userCredentials))
+		  .spec(requestSpec(userBean))
 		  .when()
 		  .post("login")
 		  .then()
