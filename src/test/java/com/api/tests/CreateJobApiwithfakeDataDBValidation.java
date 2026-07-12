@@ -18,8 +18,10 @@ import com.api.request.model.CustomerAddress;
 import com.api.utils.FakerDataGenerator;
 import com.database.dao.CustomerAddressDao;
 import com.database.dao.CustomerDao;
+import com.database.dao.JobHeadDao;
 import com.database.model.CustomerAddressDBModel;
 import com.database.model.CustomerDBModel;
+import com.database.model.JobHeadModel;
 
 	 
 
@@ -72,8 +74,18 @@ public class CreateJobApiwithfakeDataDBValidation {
 		     Assert.assertEquals(expeCustomerAddress.country(), customerAddressActual.getCountry());
 		     Assert.assertEquals(expeCustomerAddress.state(), customerAddressActual.getState());
 		     
+		 	JobHeadModel jobHeadModelfromDB = JobHeadDao.getDataFromJobHead(CustomerId);
+			
+			
+			Assert.assertEquals(createJobPayload.mst_oem_id(), jobHeadModelfromDB.getMst_oem_id());
+			Assert.assertEquals(createJobPayload.mst_platform_id(), jobHeadModelfromDB.getMst_platform_id());
+			Assert.assertEquals(createJobPayload.mst_warrenty_status_id(), jobHeadModelfromDB.getMst_warrenty_status_id());
+			   System.out.println("Assertion done");
+			//service location issue with 0 and 1 random generation
+			//Assert.assertEquals(createJobPayload.mst_service_location_id(), jobHeadModelfromDB.getMst_service_location_id());
+	 	
 		     
-		     System.out.println("done");
+		  
 		     
 	}
 
