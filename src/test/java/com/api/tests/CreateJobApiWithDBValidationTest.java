@@ -31,9 +31,11 @@ import com.api.request.model.Problems;
 import com.database.dao.CustomerAddressDao;
 import com.database.dao.CustomerDao;
 import com.database.dao.CustomerProductDao;
+import com.database.dao.MapJobProblemDao;
 import com.database.model.CustomerAddressDBModel;
 import com.database.model.CustomerDBModel;
 import com.database.model.CustomerProductDBModel;
+import com.database.model.MapJobProblemDBModel;
 
 import io.restassured.response.Response;
 
@@ -49,8 +51,8 @@ public class CreateJobApiWithDBValidationTest {
 		customer = new Customer("Raju", "Kumar", "8900988907", "", "RajuKumar@gmail.com", "");
 		customerAddress = new CustomerAddress("2-983", "Raju Enclave", "Raju Road", "Amogha", "Kondapur", "515003",
 				"India", "Telangana");
-		customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "763908023748287", "763908023748287",
-				"763908023748287", getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(), Model.NeEXUS_2_BLUE.getCode());
+		customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "093908023748287", "093908023748287",
+				"093908023748287", getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(), Model.NeEXUS_2_BLUE.getCode());
 		Problems problems = new Problems(Problem.POOR_BATTERY_LIFE.getCode(), "Charging Issue");
 
 		List<Problems> problemlist = new ArrayList<Problems>();
@@ -94,6 +96,19 @@ public class CreateJobApiWithDBValidationTest {
 		Assert.assertEquals(customerAddress.country(), customerAddressDBModel.getCountry());
 		Assert.assertEquals(customerAddress.state(), customerAddressDBModel.getState());
 
+	
+
+		
+		
+		int tr_job_head_id = response.body().jsonPath().getInt("data.id");
+		
+		MapJobProblemDBModel mapJobProblemDBModel = MapJobProblemDao.getProblemsInfo(tr_job_head_id);
+		
+		
+		Assert.assertEquals(mapJobProblemDBModel.getMst_problem_id(), createJobPayload.problems().get(0).id());
+		Assert.assertEquals(mapJobProblemDBModel.getRemark(), createJobPayload.problems().get(0).remark());
+		
+		
 		int productId = response.body().jsonPath().getInt("data.tr_customer_product_id");
 
 		CustomerProductDBModel customerProductDBModel = CustomerProductDao.getCustomerProduct(productId);
@@ -103,9 +118,15 @@ public class CreateJobApiWithDBValidationTest {
 		Assert.assertEquals(customerProduct.serial_number(), customerProductDBModel.getSerial_number());
 		Assert.assertEquals(customerProduct.mst_model_id(), customerProductDBModel.getMst_model_id());
 		Assert.assertEquals(customerProduct.popurl(), customerProductDBModel.getPopurl());
+		System.out.println("Assertion done");
+		//dop will fail bcoz of datemismatch
 		Assert.assertEquals(customerProduct.dop(), customerProductDBModel.getDop());
-
-		System.out.println("done");
+		
+		
+		
+		
+		
+		
 
 	}
 
