@@ -11,6 +11,10 @@ import com.database.DatabaseManager;
 import com.dataprovider.api.bean.CreateJobBean;
 
 public class CreateJobPayloadDataDao {
+	
+	private CreateJobPayloadDataDao() {
+		
+	}
 
 	public static final String SQL_QUERY = """
 				 SELECT
