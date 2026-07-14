@@ -51,7 +51,7 @@ public class CreateJobApiwithfakeDataDBValidation {
 		
 		     Customer expectedCustomer = createJobPayload.customer();
 		     
-		     CustomerDBModel customerActual = CustomerDao.getCustomerInfo(CustomerId);
+		      CustomerDBModel customerActual = CustomerDao.getCustomerInfo(CustomerId);
 		     
 		        Assert.assertEquals(expectedCustomer.first_name(), customerActual.getFirst_name());
 		        Assert.assertEquals(expectedCustomer.last_name(), customerActual.getLast_name());
