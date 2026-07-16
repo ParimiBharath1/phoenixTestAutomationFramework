@@ -52,8 +52,8 @@ public class CreateJobApiWithDBValidationWithResponseModelTest {
 		customer = new Customer("Raju", "Kumar", "8900988907", "", "RajuKumar@gmail.com", "");
 		customerAddress = new CustomerAddress("2-983", "Raju Enclave", "Raju Road", "Amogha", "Kondapur", "515003",
 				"India", "Telangana");
-		customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "721456023748287", "721456023748287",
-				"721456023748287", getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(), Model.NeEXUS_2_BLUE.getCode());
+		customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "721456023748567", "721456023748567",
+				"721456023748567", getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(), Model.NeEXUS_2_BLUE.getCode());
 		Problems problems = new Problems(Problem.POOR_BATTERY_LIFE.getCode(), "Charging Issue");
 
 		List<Problems> problemlist = new ArrayList<Problems>();
