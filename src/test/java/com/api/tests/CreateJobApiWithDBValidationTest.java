@@ -77,7 +77,7 @@ public class CreateJobApiWithDBValidationTest {
 
 		int CustomerId = response.body().jsonPath().getInt("data.tr_customer_id");
 
-		CustomerDBModel customerDatafromdb = CustomerDao.getCustomerInfo(CustomerId);
+		CustomerDBModel customerDatafromdb =  CustomerDao.getCustomerInfo(CustomerId);
 
 		Assert.assertEquals(customer.first_name(), customerDatafromdb.getFirst_name());
 		Assert.assertEquals(customer.last_name(), customerDatafromdb.getLast_name());
