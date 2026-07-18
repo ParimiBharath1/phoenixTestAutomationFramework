@@ -4,11 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.database.DatabaseManager;
 import com.database.model.JobHeadModel;
 
 public class JobHeadDao {
 
+	private static  Logger  LOGGER = LogManager.getLogger(JobHeadDao.class);
 	private static final String JOB_HEAD_QUERY = """
 
 			select * from tr_job_head  where tr_customer_id = ?
@@ -21,8 +25,9 @@ public class JobHeadDao {
 	public static JobHeadModel getDataFromJobHead(int tr_customer_id) {
 		JobHeadModel jobHeadModel = null;
 		try {
-
+			LOGGER.info("Getting the connection from database manager");
 			Connection connection = DatabaseManager.getconnection();
+			LOGGER.info("Executing sql query{}",JOB_HEAD_QUERY);
 			PreparedStatement preparedStatement = connection.prepareStatement(JOB_HEAD_QUERY);
 			preparedStatement.setInt(1, tr_customer_id);
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -37,6 +42,7 @@ public class JobHeadDao {
 
 		} catch (Exception e) {
 			// TODO: handle exception
+			LOGGER.error("Cannot convert the resultset to JobHeadModel bean");
 		}
 
 		return jobHeadModel;

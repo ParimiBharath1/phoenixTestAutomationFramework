@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.constants.Model;
@@ -29,7 +30,7 @@ import com.api.service.JobService;
 
 	 
 
-
+@Listeners(com.listeners.ApiTestListener.class)
 public class CreateJobApiTest {
 	
 	private CreateJobPayload createJobPayload;
@@ -40,8 +41,8 @@ public class CreateJobApiTest {
 		Customer customer = new Customer("Raju", "Kumar", "8900988907", "", "RajuKumar@gmail.com", "");
 		CustomerAddress customerAddress = new CustomerAddress("2-983", "Raju Enclave", "Raju Road", "Amogha",
 				"Kondapur", "515003", "India", "Telangana");
-		CustomerProduct customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "678646023748292",
-				"678646023748292", "678646023748292", getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(),
+		CustomerProduct customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "654646023748292",
+				"654646023748292", "654646023748292", getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(),
 				Model.NeEXUS_2_BLUE.getCode());
 		Problems problems = new Problems(Problem.POOR_BATTERY_LIFE.getCode(), "Charging Issue");
 
