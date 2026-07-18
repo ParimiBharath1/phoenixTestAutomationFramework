@@ -9,35 +9,25 @@ import java.io.IOException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.api.request.model.UserCredentials;
 import com.api.service.AuthService;
 import com.dataprovider.api.bean.UserBean;
 
 public class LoginApiTest {
-	
+
 	private UserBean userCredentials;
-	private  AuthService authService; 
-	
+	private AuthService authService;
+
 	@BeforeMethod(description = "Create the Payload for the loginApi")
 	public void setup() {
-		 userCredentials = new UserBean("iamfd", "password");
-		 authService = new AuthService();
+		userCredentials = new UserBean("iamfd", "password");
+		authService = new AuthService();
 	}
-	
-	
-	
 
-	@Test(description = "Verifying if login Api is working for FD user", groups = {"api","regression","smoke"})
+	@Test(description = "Verifying if login Api is working for FD user", groups = { "api", "regression", "smoke" })
 	public void loginApiTest() throws IOException {
 
-	
-
-		   authService.login(userCredentials)
-		  .then()
-		  .spec(responseSpec_OK())
-		  .body("message", equalTo("Success"))
-		  .body( matchesJsonSchemaInClasspath("response-schema/LoginResponseSchema.json"));
-				 
+		authService.login(userCredentials).then().spec(responseSpec_OK()).body("message", equalTo("Success"))
+				.body(matchesJsonSchemaInClasspath("response-schema/LoginResponseSchema.json"));
 
 	}
 
