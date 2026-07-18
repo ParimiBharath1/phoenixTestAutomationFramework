@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.constants.Model;
@@ -29,7 +30,7 @@ import com.api.service.JobService;
 
 	 
 
-
+@Listeners(com.listeners.ApiTestListener.class)
 public class CreateJobApiTest {
 	
 	private CreateJobPayload createJobPayload;

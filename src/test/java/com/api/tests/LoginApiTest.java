@@ -7,11 +7,13 @@ import static org.hamcrest.Matchers.equalTo;
 import java.io.IOException;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.service.AuthService;
 import com.dataprovider.api.bean.UserBean;
 
+@Listeners(com.listeners.ApiTestListener.class)
 public class LoginApiTest {
 
 	private UserBean userCredentials;
