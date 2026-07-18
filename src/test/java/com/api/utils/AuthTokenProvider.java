@@ -3,6 +3,10 @@ package com.api.utils;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import static com.api.utils.ConfigManager.*;
 
 import static com.api.constants.Role.*;
@@ -15,6 +19,7 @@ import io.restassured.http.ContentType;
 
 public class AuthTokenProvider {
 
+	private static Map< Role, String > tokenCache = new ConcurrentHashMap<Role, String>();
 	
 	 private AuthTokenProvider() {
 		 //Private cosntructor
@@ -22,7 +27,9 @@ public class AuthTokenProvider {
 	
 	public static String gettoken(Role role) {
 		  
-	 
+	        if(tokenCache.containsKey(role)) {
+	        	return tokenCache.get(role);
+	        }
 
 			UserCredentials userCredentials = null;
 			
