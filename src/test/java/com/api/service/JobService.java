@@ -11,6 +11,7 @@ public class JobService {
 
 	private static final String CREATE_JOB_ENDPOINT = "/job/create";
 	
+	private static final String SEARCH_ENDPOINT = "/job/search";
 	
 	public Response createJob(Role role, Object createJobPayload) {
 		
@@ -19,4 +20,13 @@ public class JobService {
         .when().post(CREATE_JOB_ENDPOINT);
 		return response;
 	}
+	
+   public Response searchJob(Role role, Object payloadObject) {
+		
+		Response response =given()
+        .spec(requestSpecWithAuth(Role.FD, payloadObject))
+        .when().post(SEARCH_ENDPOINT);
+		return response;
+	}
 }
+
