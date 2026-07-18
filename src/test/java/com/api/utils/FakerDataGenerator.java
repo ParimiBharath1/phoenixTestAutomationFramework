@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.api.request.model.CreateJobPayload;
 import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
@@ -19,6 +22,8 @@ public class FakerDataGenerator {
 	private FakerDataGenerator() {
 		//utilty design pattern 
 	}
+	
+	private static  Logger  LOGGER = LogManager.getLogger(FakerDataGenerator.class);
 	
 	private static   Faker faker = new Faker(new Locale("en-IND"));
 	 private static final String COUNTRY="INDIA";
@@ -35,6 +40,8 @@ public class FakerDataGenerator {
 	
 	public static CreateJobPayload createFakeCreateJobdata() {
 		
+		LOGGER.info("Generating the fakepayload for createjob");
+		
 		Customer customer = generateFakeCustomerData();
 		CustomerAddress customerAddress = generatFakeCustomerAddress();
 		CustomerProduct customerProduct = getFakeCustomerProduct();
@@ -48,6 +55,8 @@ public class FakerDataGenerator {
 	}
 	
 	public static Iterator<CreateJobPayload> createFakeCreateJobdata(int count) {
+		
+		LOGGER.info("Generating the fakepayload for {} createjobs",count);
 		
 		 List<CreateJobPayload> payloadList = new ArrayList<CreateJobPayload>();
 		  

@@ -40,8 +40,8 @@ public class CreateJobApiTest {
 		Customer customer = new Customer("Raju", "Kumar", "8900988907", "", "RajuKumar@gmail.com", "");
 		CustomerAddress customerAddress = new CustomerAddress("2-983", "Raju Enclave", "Raju Road", "Amogha",
 				"Kondapur", "515003", "India", "Telangana");
-		CustomerProduct customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "678646023748292",
-				"678646023748292", "678646023748292", getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(),
+		CustomerProduct customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "654646023748292",
+				"654646023748292", "654646023748292", getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(),
 				Model.NeEXUS_2_BLUE.getCode());
 		Problems problems = new Problems(Problem.POOR_BATTERY_LIFE.getCode(), "Charging Issue");
 
