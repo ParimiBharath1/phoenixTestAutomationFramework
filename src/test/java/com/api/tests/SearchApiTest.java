@@ -3,6 +3,7 @@ package com.api.tests;
 import static org.hamcrest.Matchers.equalTo;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.constants.Role;
@@ -10,6 +11,7 @@ import com.api.request.model.Search;
 import com.api.service.JobService;
 import com.api.utils.SpecUtil;
 
+@Listeners(com.listeners.ApiTestListener.class)
 public class SearchApiTest {
 
 	private JobService  jobService;
@@ -23,7 +25,7 @@ public class SearchApiTest {
 	}
 	
 	@Test(description = "Job service Api working verification")
-	public void searcgApiTest() {
+	public void searchApiTest() {
 		
 		  jobService.searchJob(Role.FD, searchpayload)
 		 .then()
