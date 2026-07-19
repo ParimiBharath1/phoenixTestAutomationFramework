@@ -12,6 +12,8 @@ import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
+import io.qameta.allure.Step;
+
 public class CsvReaderUtility {
 	
 	private static  Logger  LOGGER = LogManager.getLogger(CsvReaderUtility.class);
@@ -20,6 +22,7 @@ public class CsvReaderUtility {
 		
 	}
 	
+	 @Step("Loading the testdata from CSV file")
 public static <T>  Iterator<T>  loadCsv(String pathOfCsvFile, Class<T> bean) {
 		
          

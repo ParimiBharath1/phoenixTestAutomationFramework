@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.api.constants.Role;
 
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 public class DashboardService {
@@ -18,6 +19,7 @@ public class DashboardService {
 	
 	private static  Logger  LOGGER = LogManager.getLogger(DashboardService.class);
 
+	@Step("Making Count Api request for the role")
 	public Response count(Role role) {
 		
 		 LOGGER.info("Making request to the {} for the role {}", COUNT_ENDPOINT, role);
@@ -26,6 +28,7 @@ public class DashboardService {
 		return response;
 	}
 
+	@Step("Making Count Api request without Auth token")
 	public Response countWithNoAuth() {
 		
 		 LOGGER.info("Making request to the {} with No Auth Token", COUNT_ENDPOINT);
@@ -37,6 +40,7 @@ public class DashboardService {
 	}
 
 	// Details Endpoint method
+	@Step("Making Details Api request")
 	public Response details(Role role,Object detailsObject) {
 		
 		 LOGGER.info("Making request to the {} for the role {} and the payload {}", DETAIL_ENDPOINT, role,detailsObject);

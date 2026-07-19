@@ -10,6 +10,8 @@ import org.apache.logging.log4j.Logger;
 import com.database.DatabaseManager;
 import com.database.model.CustomerDBModel;
 
+import io.qameta.allure.Step;
+
 public class CustomerDao {
 	
 	private CustomerDao() {
@@ -23,6 +25,7 @@ public class CustomerDao {
 			 select * from tr_customer where id=?
 			""";
 
+	 @Step("Retriving the Create customer data from Database for specific customer id")
 	public static CustomerDBModel getCustomerInfo(int customerId) {
 
 		CustomerDBModel customerDBModel = null;

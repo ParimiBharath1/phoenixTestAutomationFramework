@@ -12,6 +12,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.poiji.bind.Poiji;
 
+import io.qameta.allure.Step;
+
 
 public class ExcelReaderUtil {
 	
@@ -21,6 +23,7 @@ public class ExcelReaderUtil {
 		
 	}
 
+	 @Step("Loading the testdata from excel file")
 	public static <T> Iterator<T> loadTestData(String xlsxfile,String sheetname, Class<T> clazz) {
 		// TODO Auto-generated method stub
 		

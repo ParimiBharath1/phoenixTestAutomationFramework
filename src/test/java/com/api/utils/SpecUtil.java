@@ -7,6 +7,7 @@ import org.hamcrest.Matchers;
 import com.api.constants.Role;
 import com.api.filter.SensitiveDataFilter;
 
+import io.qameta.allure.Step;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
@@ -16,6 +17,7 @@ import io.restassured.specification.ResponseSpecification;
 public class SpecUtil {
 
 	//GET and DELETE
+	@Step("Setting up the BaseURI, Content Type and attaching the SensitiveDataFilter")
 	public static RequestSpecification requestSpec() {
 		
 		
@@ -33,6 +35,7 @@ public class SpecUtil {
 	
 	
 	//POST PUT PATCH
+	@Step("Setting up the BaseURI, Content Type,Payload and attaching the SensitiveDataFilter")
     public static RequestSpecification requestSpec(Object payload) {
 		
 		
@@ -50,6 +53,7 @@ public class SpecUtil {
 	}
     
     //Request spec with AUTH
+	@Step("Setting up the BaseURI, Content Type and attaching the SensitiveDataFilter for role")
  public static RequestSpecification requestSpecWithAuth(Role role) {
 		
 		
@@ -66,6 +70,7 @@ public class SpecUtil {
 		
 	}
     
+	@Step("Setting up the BaseURI, Content Type,Payload and attaching the SensitiveDataFilter for role")
  public static RequestSpecification requestSpecWithAuth(Role role, Object payload) {
 		
 		
@@ -83,6 +88,7 @@ public class SpecUtil {
 		
 	}
     
+	@Step("Expecting the  response to have Content Type as Application/json, statuscode as 200  and  Response time as less than 1000ms")
      public static ResponseSpecification responseSpec_OK() {
     	 
     	 ResponseSpecification responseSpecification  = new ResponseSpecBuilder()
@@ -96,7 +102,7 @@ public class SpecUtil {
     	 
      }
      
-     
+	@Step("Expecting the  response to have Content Type as Application/json, statuscode  as customized  and  Response time as less than 1000ms")
   public static ResponseSpecification responseSpec_JSON(int statusCode) {
     	 
     	 ResponseSpecification responseSpecification  = new ResponseSpecBuilder()
@@ -112,6 +118,7 @@ public class SpecUtil {
   
     
   //content type is not checked here
+	@Step("Expecting the  response to have  Content Type as Text, statuscode as customized  and  Response time as less than 1000ms")
   public static ResponseSpecification responseSpec_TEXT(int statusCode) {
  	 
  	 ResponseSpecification responseSpecification  = new ResponseSpecBuilder()
