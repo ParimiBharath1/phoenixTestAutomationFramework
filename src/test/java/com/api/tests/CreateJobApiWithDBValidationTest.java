@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.constants.Model;
@@ -40,6 +41,7 @@ import com.database.model.MapJobProblemDBModel;
 
 import io.restassured.response.Response;
 
+@Listeners(com.listeners.ApiTestListener.class)
 public class CreateJobApiWithDBValidationTest {
 
 	private CreateJobPayload createJobPayload;

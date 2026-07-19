@@ -51,8 +51,7 @@ public class AuthTokenProvider {
 		}
 
 		String token = given().baseUri(getProperty("BASE_URI")).and().contentType(ContentType.JSON).and()
-				.accept(ContentType.JSON).and().body(userCredentials).log().uri().log().method().log().headers().log()
-				.body().when().post("login").then().log().ifValidationFails().statusCode(200).and()
+				.accept(ContentType.JSON).and().body(userCredentials).when().post("login").then().log().ifValidationFails().statusCode(200).and()
 				.body("message", equalTo("Success"))
 
 				.extract().body().jsonPath().getString("data.token");

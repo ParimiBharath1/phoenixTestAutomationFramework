@@ -6,7 +6,6 @@ import static io.restassured.RestAssured.given;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.api.request.model.UserCredentials;
 import com.dataprovider.api.bean.UserBean;
 
 import io.restassured.response.Response;

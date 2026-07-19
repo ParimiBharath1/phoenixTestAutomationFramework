@@ -7,6 +7,7 @@ import static org.hamcrest.Matchers.startsWith;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.constants.Role;
@@ -22,6 +23,7 @@ import com.database.model.CustomerAddressDBModel;
 import com.database.model.CustomerDBModel;
 import com.database.model.JobHeadModel;
 
+@Listeners(com.listeners.ApiTestListener.class)
 public class CreateJobApiwithfakeDataDBValidation {
 
 	private CreateJobPayload createJobPayload;

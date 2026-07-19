@@ -5,12 +5,13 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 import static org.hamcrest.Matchers.equalTo;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import com.api.request.model.UserCredentials;
 import com.api.service.AuthService;
 import com.dataprovider.api.bean.UserBean;
 
+@Listeners(com.listeners.ApiTestListener.class)
 public class LoginApiDataDrivenJson {
 	
    private AuthService authService;

@@ -7,11 +7,13 @@ import static org.hamcrest.Matchers.equalTo;
 import java.io.IOException;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.api.constants.Role.*;
 import com.api.service.UserService;
 
+@Listeners(com.listeners.ApiTestListener.class)
 public class UserDetailsApiTest {
 	
 	private UserService userService;
