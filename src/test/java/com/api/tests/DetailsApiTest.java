@@ -11,7 +11,16 @@ import com.api.request.model.Detail;
 import com.api.service.DashboardService;
 import com.api.utils.SpecUtil;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
+
 @Listeners(com.listeners.ApiTestListener.class)
+@Epic("Job Management")
+@Feature("Job Details")
 public class DetailsApiTest {
 
 	private DashboardService dashboardService;
@@ -23,6 +32,9 @@ public class DetailsApiTest {
 		detailPayloaDetail = new Detail("created_today");
 	}
 	
+	@Story("Job details should be shown correctly")
+	@Description("Verifying if the jobDetails Api response is shown correctly via Api")
+	@Severity(SeverityLevel.CRITICAL)
 	@Test(description = "Verify if details Api work properly",groups = {"smoke","regression","sanity"})
 	public void detailApiTest() {
 		
