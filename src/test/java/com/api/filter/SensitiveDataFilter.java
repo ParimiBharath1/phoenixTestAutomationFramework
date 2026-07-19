@@ -20,11 +20,9 @@ public class SensitiveDataFilter implements Filter {
 	@Override
 	public Response filter(FilterableRequestSpecification requestSpec, FilterableResponseSpecification responseSpec,
 			FilterContext ctx) {
-		// TODO Auto-generated method stub
 		 LOGGER.info("******************************REQUEST DETAILS********************************");
 		 LOGGER.info("BASE URI: {}",requestSpec.getURI());
 		 LOGGER.info("HTTP METHOD: {}",requestSpec.getMethod());
-//		 LOGGER.info("REQUEST HEADERS: \n {}",requestSpec.getHeaders());
 		 readactHeader(requestSpec);
 		 readactPayload(requestSpec);
 		 Response response = ctx.next(requestSpec, responseSpec);	 
@@ -38,7 +36,6 @@ public class SensitiveDataFilter implements Filter {
 	}
 	
 	private void readactHeader(FilterableRequestSpecification requestSpec) {
-		// TODO Auto-generated method stub
 		
 		    List<Header> headerList = requestSpec.getHeaders().asList();
 		    
@@ -58,7 +55,7 @@ public class SensitiveDataFilter implements Filter {
 	private void readactPayload(FilterableRequestSpecification requestSpec) {
 		
 		if(requestSpec.getBody()!=null) {
-			//POST PUT AND DELETE WHERE ONLY BODY IS AVAILABLE 
+			//POST PUT AND DELETE WHERE ONLY BODY IS AVAILABLE Password is REDACTED
 		String requestPayload =  requestSpec.getBody().toString();
 		
 		   requestPayload = requestPayload.replaceAll("\"password\"\s*:\s*\"[^\"]+\"",  "\"password\":\"[REDACTED]\"");

@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.startsWith;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.constants.Role;
@@ -15,7 +16,7 @@ import com.api.utils.FakerDataGenerator;
 
 	 
 
-
+@Listeners(com.listeners.ApiTestListener.class)
 public class CreateJobApiTestwithfakeData {
 	
 	private CreateJobPayload createJobPayload;
