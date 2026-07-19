@@ -7,12 +7,14 @@ import org.testng.ITestResult;
 
 public class RetryAnalyzer implements IRetryAnalyzer {
 	
+	private static  Logger  LOGGER = LogManager.getLogger(RetryAnalyzer.class);
+	
 	private static final int MAX_ATTEMPTS =2;
 	
 	private int count=1;
 	
-	private static  Logger  LOGGER = LogManager.getLogger(RetryAnalyzer.class);
-
+	
+    
 	@Override
 	public boolean retry(ITestResult result) {
 		
