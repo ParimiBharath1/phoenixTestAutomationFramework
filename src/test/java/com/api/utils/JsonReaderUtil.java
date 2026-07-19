@@ -11,10 +11,13 @@ import org.apache.logging.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.qameta.allure.Step;
+
 public class JsonReaderUtil {
 	
 	private static  Logger  LOGGER = LogManager.getLogger(JsonReaderUtil.class);
 
+	 @Step("Loading the testdata from Json file")
 	public static  <T> Iterator<T> loadJson(String filename, Class<T[]> clazz) {
 		// TODO Auto-generated method stub
 		

@@ -16,108 +16,109 @@ import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
 import com.github.javafaker.Faker;
 
+import io.qameta.allure.Step;
 
 public class FakerDataGenerator {
-	
+
 	private FakerDataGenerator() {
-		//utilty design pattern 
+		// utilty design pattern
 	}
-	
-	private static  Logger  LOGGER = LogManager.getLogger(FakerDataGenerator.class);
-	
-	private static   Faker faker = new Faker(new Locale("en-IND"));
-	 private static final String COUNTRY="INDIA";
-	 private static final Random RANDOM = new Random();
-	 private static final int MST_SERVICE_LOCATION= 0;
-	 private static final int MST_PLATFORM_ID= 2;
-	 private static final int MST_WARRENTY_STATIS_ID= 2;
-	 private static final int MST_OEM_ID= 1;
-	 private static final int PRODUCT_ID= 1;
-	 private static final int MST_MODEL_ID= 1;
-	 
-	 private static  final int VALIDPROMBLEMID[] = {1,2,3,4,5,6,7,8,9,10,11,12,15,16,17,19,22,24,26,27,28,29};
-	
-	
+
+	private static Logger LOGGER = LogManager.getLogger(FakerDataGenerator.class);
+
+	private static Faker faker = new Faker(new Locale("en-IND"));
+	private static final String COUNTRY = "INDIA";
+	private static final Random RANDOM = new Random();
+	private static final int MST_SERVICE_LOCATION = 0;
+	private static final int MST_PLATFORM_ID = 2;
+	private static final int MST_WARRENTY_STATIS_ID = 2;
+	private static final int MST_OEM_ID = 1;
+	private static final int PRODUCT_ID = 1;
+	private static final int MST_MODEL_ID = 1;
+
+	private static final int VALIDPROMBLEMID[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 17, 19, 22, 24, 26,
+			27, 28, 29 };
+
+	@Step("Generating Fake create job data")
 	public static CreateJobPayload createFakeCreateJobdata() {
-		
+
 		LOGGER.info("Generating the fakepayload for createjob");
-		
+
 		Customer customer = generateFakeCustomerData();
 		CustomerAddress customerAddress = generatFakeCustomerAddress();
 		CustomerProduct customerProduct = getFakeCustomerProduct();
-		List<Problems> problemList =getFakeProblemList();
-		
-		CreateJobPayload payload = new CreateJobPayload(MST_SERVICE_LOCATION, MST_PLATFORM_ID, MST_WARRENTY_STATIS_ID, MST_OEM_ID, customer,
-				customerAddress, customerProduct, problemList);
-		
+		List<Problems> problemList = getFakeProblemList();
+
+		CreateJobPayload payload = new CreateJobPayload(MST_SERVICE_LOCATION, MST_PLATFORM_ID, MST_WARRENTY_STATIS_ID,
+				MST_OEM_ID, customer, customerAddress, customerProduct, problemList);
+
 		return payload;
-			
+
 	}
-	
+
+	@Step("Generating Multiple Fake create job data with the count")
 	public static Iterator<CreateJobPayload> createFakeCreateJobdata(int count) {
-		
-		LOGGER.info("Generating the fakepayload for {} createjobs",count);
-		
-		 List<CreateJobPayload> payloadList = new ArrayList<CreateJobPayload>();
-		  
-		 
-		for(int i=0;i<count;i++) {
-		Customer customer = generateFakeCustomerData();
-		CustomerAddress customerAddress = generatFakeCustomerAddress();
-		CustomerProduct customerProduct = getFakeCustomerProduct();
-		List<Problems> problemList =getFakeProblemList();
-		
-		CreateJobPayload payload = new CreateJobPayload(MST_SERVICE_LOCATION, MST_PLATFORM_ID, MST_WARRENTY_STATIS_ID, MST_OEM_ID, customer,
-				customerAddress, customerProduct, problemList);
-		
-		payloadList.add(payload);
-		 
+
+		LOGGER.info("Generating the fakepayload for {} createjobs", count);
+
+		List<CreateJobPayload> payloadList = new ArrayList<CreateJobPayload>();
+
+		for (int i = 0; i < count; i++) {
+			Customer customer = generateFakeCustomerData();
+			CustomerAddress customerAddress = generatFakeCustomerAddress();
+			CustomerProduct customerProduct = getFakeCustomerProduct();
+			List<Problems> problemList = getFakeProblemList();
+
+			CreateJobPayload payload = new CreateJobPayload(MST_SERVICE_LOCATION, MST_PLATFORM_ID,
+					MST_WARRENTY_STATIS_ID, MST_OEM_ID, customer, customerAddress, customerProduct, problemList);
+
+			payloadList.add(payload);
+
 		}
-		
+
 		return payloadList.iterator();
-			
+
 	}
 
-
-private static List<Problems> getFakeProblemList() {
+	@Step("Generating   Fake Problem list data for Create Job payload")
+	private static List<Problems> getFakeProblemList() {
 		// TODO Auto-generated method stub
-	
-	int count = RANDOM.nextInt(3)+1;
-	
-	 int randomindex;
-	 String remarkString;
-		List<Problems> problemList = new ArrayList<Problems>();
-		 Problems problems;
-	
 
-	
-	for(int i=1;i<=count;i++) {
-	
-        randomindex= RANDOM.nextInt(VALIDPROMBLEMID.length);
-	
-	   remarkString = faker.lorem().sentence(5);
-	    problems= new Problems(VALIDPROMBLEMID[randomindex], remarkString);
-	
-	problemList.add(problems);
-	}
+		int count = RANDOM.nextInt(3) + 1;
+
+		int randomindex;
+		String remarkString;
+		List<Problems> problemList = new ArrayList<Problems>();
+		Problems problems;
+
+		for (int i = 1; i <= count; i++) {
+
+			randomindex = RANDOM.nextInt(VALIDPROMBLEMID.length);
+
+			remarkString = faker.lorem().sentence(5);
+			problems = new Problems(VALIDPROMBLEMID[randomindex], remarkString);
+
+			problemList.add(problems);
+		}
 		return problemList;
 	}
 
-
+	@Step("Generating Fake CustomerProduct Info")
 	private static CustomerProduct getFakeCustomerProduct() {
 		// TODO Auto-generated method stub
-String dop = DateTimeUtil.getTimeWithDaysAgo(10);
-		
+		String dop = DateTimeUtil.getTimeWithDaysAgo(10);
+
 		String imenum = faker.numerify("##############");
-		
+
 		String popurl = DateTimeUtil.getTimeWithDaysAgo(10);
-			
-		CustomerProduct customerProduct = new CustomerProduct(dop, imenum, imenum, imenum, popurl, PRODUCT_ID,MST_MODEL_ID);
-		
+
+		CustomerProduct customerProduct = new CustomerProduct(dop, imenum, imenum, imenum, popurl, PRODUCT_ID,
+				MST_MODEL_ID);
+
 		return customerProduct;
 	}
 
-
+	@Step("Generating Fake CustomerAddress Info")
 	private static CustomerAddress generatFakeCustomerAddress() {
 		// TODO Auto-generated method stub
 		String flat_number = faker.numerify(("1-40##"));
@@ -125,23 +126,22 @@ String dop = DateTimeUtil.getTimeWithDaysAgo(10);
 		String street_name = faker.address().streetName();
 		String landmark = faker.address().streetName();
 		String area = faker.address().streetName();
-		String pincode = faker.numerify("#######") ;
+		String pincode = faker.numerify("#######");
 		String state = faker.address().state();
-		
-		
-		CustomerAddress customerAddress = new  CustomerAddress(flat_number, apartment_name, street_name,
-				landmark, area, pincode, COUNTRY, state);
+
+		CustomerAddress customerAddress = new CustomerAddress(flat_number, apartment_name, street_name, landmark, area,
+				pincode, COUNTRY, state);
 		return customerAddress;
 	}
 
-
+	@Step("Generating Fake Customer Info")
 	private static Customer generateFakeCustomerData() {
 		// TODO Auto-generated method stub
 		String fname = faker.name().firstName();
 		String lname = faker.name().lastName();
 		String mobilnumber = faker.numerify("765#######");
 		String email = faker.internet().emailAddress();
-			
+
 		Customer customer = new Customer(fname, lname, mobilnumber, "", email, "");
 		return customer;
 	}

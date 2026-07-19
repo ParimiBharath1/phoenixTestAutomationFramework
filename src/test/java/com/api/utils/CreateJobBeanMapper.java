@@ -13,6 +13,8 @@ import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
 import com.dataprovider.api.bean.CreateJobBean;
 
+import io.qameta.allure.Step;
+
 public class CreateJobBeanMapper {
 	
 	private static  Logger  LOGGER = LogManager.getLogger(ConfigManager.class);
@@ -21,6 +23,7 @@ public class CreateJobBeanMapper {
 		
 	}
 	
+	 @Step("Converting the CreatJobBean to the Create Job Payload for create job ApiTest")
 	public static CreateJobPayload mapper(CreateJobBean bean) {
 		
 		LOGGER.info("Converting the create job bean to createjobpayload {}....................", bean);

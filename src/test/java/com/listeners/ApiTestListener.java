@@ -8,6 +8,8 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import com.api.utils.AllureEnvironmentWriterUtil;
+
 
 public class ApiTestListener implements  ITestListener{
 	
@@ -46,6 +48,7 @@ public class ApiTestListener implements  ITestListener{
 	 
 	  public void onStart(ITestContext context) {
 		  LOGGER.warn("*********************STARTING THE PHOENIX FRAMEWORK*******************************");
+		  AllureEnvironmentWriterUtil.createEnvironmentPropertiesFile();
 		  }
  
 		  public void onFinish(ITestContext context) {

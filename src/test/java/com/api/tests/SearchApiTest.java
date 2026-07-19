@@ -11,7 +11,16 @@ import com.api.request.model.Search;
 import com.api.service.JobService;
 import com.api.utils.SpecUtil;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
+
 @Listeners(com.listeners.ApiTestListener.class)
+@Epic("Job Management")
+@Feature("Search Api")
 public class SearchApiTest {
 
 	private JobService  jobService;
@@ -24,7 +33,10 @@ public class SearchApiTest {
 		searchpayload = new Search(jobNumber);
 	}
 	
-	@Test(description = "Job service Api working verification")
+	@Story("Search Api should bring the required job data")
+	@Description("Job search Api working verification via Api")
+	@Severity(SeverityLevel.MINOR)
+	@Test(description = "Job search Api working verification")
 	public void searchApiTest() {
 		
 		  jobService.searchJob(Role.FD, searchpayload)
