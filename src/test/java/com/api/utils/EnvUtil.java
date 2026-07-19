@@ -7,7 +7,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 public class EnvUtil {
 	
-	private static  Logger  LOGGER = LogManager.getLogger(EnvUtil.class);
+	private static final Logger  LOGGER = LogManager.getLogger(EnvUtil.class);
 	
 	private static Dotenv dotenv;
 	

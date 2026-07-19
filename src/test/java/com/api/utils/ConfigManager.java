@@ -14,7 +14,7 @@ public class ConfigManager {
 	
 	private static String path = "config/config.properties";
 	
-	private static String env;
+	public static String env;
 	
 	private static  Logger  LOGGER = LogManager.getLogger(ConfigManager.class);
 	
